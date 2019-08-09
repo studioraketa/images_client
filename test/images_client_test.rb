@@ -1,7 +1,9 @@
 require 'test_helper'
 
-class ImagesClient::Test < ActiveSupport::TestCase
-  test "truth" do
-    assert_kind_of Module, ImagesClient
+module ImagesClient
+  class Test < ActiveSupport::TestCase
+    test 'truth' do
+      assert_kind_of Module, ImagesClient
+    end
   end
 end
