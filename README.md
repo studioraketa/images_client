@@ -1,14 +1,12 @@
 # ImagesClient
-Short description and motivation.
-
-## Usage
-How to use my plugin.
+At Raketa we have our fast and reliable Images Service where we store the images for our Rails projects.
+With this rails engine we are able to attach it to all of our Rails projects.
 
 ## Installation
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'images_client'
+gem 'images_client', github: 'studioraketa/images_client'
 ```
 
 And then execute:
@@ -16,9 +14,29 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
-```bash
-$ gem install images_client
+## Usage
+
+Mount the engine in your application's routes.rb file:
+```ruby
+mount ImagesClient::Engine, at: '/images/client'
+```
+This will expose `/images/clinet/images` endpoint in your Rails application which can be used to upload, delte and search for images.
+
+Setup the configuration of the engine by creating an initializer in your Rails application:
+```ruby
+module ImagesClient
+  module Configuration
+    class << self
+      def service_url
+        # Return the URL of the Raketa Images service
+      end
+
+      def service_token
+        # Return your access token for the Raketa Images service
+      end
+    end
+  end
+end
 ```
 
 ## Contributing

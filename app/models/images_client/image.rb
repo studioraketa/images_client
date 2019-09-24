@@ -3,13 +3,13 @@ module ImagesClient
     class << self
       def default
         new(
-          Configuration.service_url,
-          Configuration.service_token
+          ImagesClient::Configuration.service_url,
+          ImagesClient::Configuration.service_token
         )
       end
     end
 
-    def initialize(url, token, http_adapter = Connection)
+    def initialize(url, token, http_adapter = ImagesClient::Connection)
       @url = url
       @token = token
       @http_adapter = http_adapter

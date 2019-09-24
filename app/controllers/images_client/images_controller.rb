@@ -1,19 +1,19 @@
 module ImagesClient
-  class ImagesController < ApplicationController
+  class ImagesController < ImagesClient::ApplicationController
     def index
-      remote_response Image.default.search(params[:q])
+      remote_response ImagesClient::Image.default.search(params[:q])
     end
 
     def create
-      remote_response Image.default.upload(image_params)
+      remote_response ImagesClient::Image.default.upload(image_params)
     end
 
     def show
-      remote_response Image.default.show(params[:id])
+      remote_response ImagesClient::Image.default.show(params[:id])
     end
 
     def destroy
-      remote_response Image.default.delete(params[:id])
+      remote_response ImagesClient::Image.default.delete(params[:id])
     end
 
     private
