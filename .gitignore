@@ -9,3 +9,6 @@ test/dummy/yarn-error.log
 test/dummy/storage/
 test/dummy/tmp/
 Gemfile.lock
+.DS_Store
+coverage/
+.byebug_history

@@ -1,5 +1,7 @@
 module ImagesClient
   class ApplicationController < ActionController::API
-    protect_from_forgery with: :exception
+    def remote_response(response)
+      render status: response.status, json: response.body
+    end
   end
 end

@@ -1,15 +1,12 @@
-require 'images_client/engine'
-require 'faraday'
-
 module ImagesClient
   module Configuration
     class << self
       def service_url
-        raise NotImplementedError
+        'http://example.com/api/images'
       end
 
       def service_token
-        raise NotImplementedError
+        'example-token'
       end
     end
   end
