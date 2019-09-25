@@ -1,5 +1,7 @@
 module ImagesClient
   class ImagesController < ImagesClient::ApplicationController
+    before_action :authorize
+
     def index
       remote_response ImagesClient::Image.default.search(params[:q])
     end

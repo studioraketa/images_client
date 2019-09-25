@@ -20,7 +20,7 @@ Mount the engine in your application's routes.rb file:
 ```ruby
 mount ImagesClient::Engine, at: '/images/client'
 ```
-This will expose `/images/clinet/images` endpoint in your Rails application which can be used to upload, delte and search for images.
+This will expose `/images/client/images` endpoint in your Rails application which can be used to upload, delte and search for images.
 
 Setup the configuration of the engine by creating an initializer in your Rails application:
 ```ruby
@@ -33,6 +33,11 @@ module ImagesClient
 
       def service_token
         # Return your access token for the Raketa Images service
+      end
+
+      def authorized?(request)
+        # Implement the authorization logic here. It will be used to guard the create and destroy actions
+        # for images.
       end
     end
   end

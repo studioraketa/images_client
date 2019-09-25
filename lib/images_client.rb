@@ -11,6 +11,10 @@ module ImagesClient
       def service_token
         raise NotImplementedError
       end
+
+      def authorized?(_request)
+        raise NotImplementedError
+      end
     end
   end
 end

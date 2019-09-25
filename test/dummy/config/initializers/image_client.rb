@@ -8,6 +8,10 @@ module ImagesClient
       def service_token
         'example-token'
       end
+
+      def authorized?(_request)
+        true
+      end
     end
   end
 end
