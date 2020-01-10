@@ -18,6 +18,23 @@ module ImagesClient
       assert_equal JSON.parse(response.body), expected_body
     end
 
+    test 'search images by query string' do
+      expected_body = [{ 'id' => 1 }, { 'id' => 2 }]
+
+      stub_request(:get, image_service_url)
+        .with(
+          headers: { 'Authorization' => "Bearer #{image_service_token}" },
+          query: { f: { name: 'cat' } }
+        )
+        .to_return(body: expected_body)
+
+      get '/images_client/images', params: { q: 'cat' }
+
+      assert_response :success
+
+      assert_equal JSON.parse(response.body), expected_body
+    end
+
     test 'search images by name' do
       expected_body = [{ 'id' => 1 }, { 'id' => 2 }]
 

@@ -46,12 +46,19 @@ module ImagesClient
     def search_params(query)
       return {} if query.blank?
 
-      {
-        f: {
-          name: query[:name],
-          library_uid: query[:library_uid]
+      case query
+      when Hash, ActionController::Parameters
+        {
+          f: {
+            name: query[:name],
+            library_uid: query[:library_uid]
+          }.compact
         }.compact
-      }.compact
+      when String
+        { f: { name: query }.compact }.compact
+      else
+        {}
+      end
     end
 
     def prepare_upload(file_upload, library_params)
