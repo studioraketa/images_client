@@ -8,7 +8,10 @@ module ImagesClient
       expected_body = [{ 'id' => 1 }, { 'id' => 2 }]
 
       stub_request(:get, image_service_url)
-        .with(headers: { 'Authorization' => "Bearer #{image_service_token}" })
+        .with(
+          headers: { 'Authorization' => "Bearer #{image_service_token}" },
+          query: { page_size: 100 }
+        )
         .to_return(body: expected_body)
 
       get '/images_client/images'
@@ -24,7 +27,7 @@ module ImagesClient
       stub_request(:get, image_service_url)
         .with(
           headers: { 'Authorization' => "Bearer #{image_service_token}" },
-          query: { f: { name: 'cat' } }
+          query: { f: { name: 'cat' }, page_size: 100 }
         )
         .to_return(body: expected_body)
 
@@ -41,7 +44,7 @@ module ImagesClient
       stub_request(:get, image_service_url)
         .with(
           headers: { 'Authorization' => "Bearer #{image_service_token}" },
-          query: { f: { name: 'cat' } }
+          query: { f: { name: 'cat' }, page_size: 100 }
         )
         .to_return(body: expected_body)
 
@@ -58,7 +61,7 @@ module ImagesClient
       stub_request(:get, image_service_url)
         .with(
           headers: { 'Authorization' => "Bearer #{image_service_token}" },
-          query: { f: { library_uid: 'cat' } }
+          query: { f: { library_uid: 'cat' }, page_size: 100 }
         )
         .to_return(body: expected_body)
 
@@ -75,7 +78,7 @@ module ImagesClient
       stub_request(:get, image_service_url)
         .with(
           headers: { 'Authorization' => "Bearer #{image_service_token}" },
-          query: { f: { library_uid: 'cat', name: 'dog' } }
+          query: { f: { library_uid: 'cat', name: 'dog' }, page_size: 100 }
         )
         .to_return(body: expected_body)
 

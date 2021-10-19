@@ -44,7 +44,7 @@ module ImagesClient
     end
 
     def search_params(query)
-      return {} if query.blank?
+      return { page_size: 100 } if query.blank?
 
       case query
       when Hash, ActionController::Parameters
@@ -52,12 +52,13 @@ module ImagesClient
           f: {
             name: query[:name],
             library_uid: query[:library_uid]
-          }.compact
+          }.compact,
+          page_size: 100,
         }.compact
       when String
-        { f: { name: query }.compact }.compact
+        { f: { name: query }.compact, page_size: 100 }.compact
       else
-        {}
+        { page_size: 100 }
       end
     end
 
