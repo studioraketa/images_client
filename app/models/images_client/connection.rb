@@ -1,3 +1,5 @@
+require 'net/http/post/multipart'
+
 module ImagesClient
   module Connection
     class << self
@@ -10,17 +12,21 @@ module ImagesClient
       end
 
       def upload(url, params, headers)
-        conn = Faraday.new(url) do |f|
-          f.request :multipart
-          f.request :url_encoded
-          f.adapter :net_http
-        end
+        uri = URI.parse(url)
+        req = Net::HTTP::Post::Multipart.new(uri.path, params, headers)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = (uri.scheme == "https")
+        res = http.request(req)
 
-        handle_response conn.post(url, params, headers)
+        OpenStruct.new(
+          status: res.code,
+          body: res.body,
+          headers: res.each_header.to_h
+        )
       end
 
       def file_upload(file)
-        Faraday::UploadIO.new(
+        UploadIO.new(
           file.tempfile.path,
           file.content_type,
           file.original_filename

@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   spec.add_dependency 'faraday'
+  spec.add_dependency 'multipart-post', '~> 2.1'
   spec.add_dependency 'rails', '>= 5.1.0'
 
   spec.add_development_dependency 'byebug'
